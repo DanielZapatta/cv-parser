@@ -24,7 +24,7 @@ export default function OptimizationPlanCard({ plan }) {
           <p className="text-xs font-semibold text-gray-500 uppercase mb-1">Keywords to Add</p>
           <div className="flex flex-wrap gap-1">
             {plan.keywordsToAdd.map((k, i) => (
-              <span key={i} className="bg-yellow-100 text-yellow-800 text-xs px-2 py-0.5 rounded-full">{k}</span>
+              <span key={`keyword-${k}-${i}`} className="bg-yellow-100 text-yellow-800 text-xs px-2 py-0.5 rounded-full">{k}</span>
             ))}
           </div>
         </div>
@@ -35,7 +35,7 @@ export default function OptimizationPlanCard({ plan }) {
           <p className="text-xs font-semibold text-gray-500 uppercase mb-1">Recommendations</p>
           <ul className="space-y-1">
             {plan.generalRecommendations.map((r, i) => (
-              <li key={i} className="text-xs text-gray-700 flex gap-1.5">
+              <li key={`rec-${i}`} className="text-xs text-gray-700 flex gap-1.5">
                 <span className="text-blue-500 flex-shrink-0 mt-0.5">→</span>{r}
               </li>
             ))}

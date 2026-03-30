@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import FileUpload from './components/FileUpload';
 import ScoreDisplay from './components/ScoreDisplay';
 import SkillsHighlight from './components/SkillsHighlight';
@@ -17,7 +17,6 @@ export default function App() {
   const [error, setError] = useState('');
   const [result, setResult] = useState(null);
   const [activeTab, setActiveTab] = useState('cv');
-  const fileInputRef = useRef(null);
 
   const handleFileSelected = (file) => {
     setSelectedFile(file);

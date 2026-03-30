@@ -69,7 +69,7 @@ export default function CvPreview({ cv }) {
             <h2 className="text-base font-semibold text-gray-700 border-b pb-1 mb-2">Skills</h2>
             <div className="flex flex-wrap gap-1.5">
               {cv.skills.map((s, i) => (
-                <span key={i} className="bg-blue-50 text-blue-700 text-xs px-2 py-0.5 rounded-full border border-blue-200">
+                <span key={`skill-${s}-${i}`} className="bg-blue-50 text-blue-700 text-xs px-2 py-0.5 rounded-full border border-blue-200">
                   {s}
                 </span>
               ))}
@@ -99,7 +99,7 @@ export default function CvPreview({ cv }) {
                   {exp.achievements?.length > 0 && (
                     <ul className="mt-1 space-y-0.5">
                       {exp.achievements.map((a, j) => (
-                        <li key={j} className="text-xs text-gray-600 flex gap-1">
+                        <li key={`achievement-${i}-${j}`} className="text-xs text-gray-600 flex gap-1">
                           <span className="text-blue-500 flex-shrink-0">•</span>
                           {a}
                         </li>
@@ -138,7 +138,7 @@ export default function CvPreview({ cv }) {
             <h2 className="text-base font-semibold text-gray-700 border-b pb-1 mb-2">Certifications</h2>
             <ul className="space-y-1">
               {cv.certifications.map((c, i) => (
-                <li key={i} className="text-xs text-gray-700 flex gap-1">
+                <li key={`cert-${c}-${i}`} className="text-xs text-gray-700 flex gap-1">
                   <span className="text-blue-500">•</span>{c}
                 </li>
               ))}
@@ -152,7 +152,7 @@ export default function CvPreview({ cv }) {
             <h2 className="text-base font-semibold text-gray-700 border-b pb-1 mb-2">Languages</h2>
             <div className="flex gap-2 flex-wrap">
               {cv.languages.map((l, i) => (
-                <span key={i} className="text-xs text-gray-700 bg-gray-100 px-2 py-0.5 rounded">{l}</span>
+                <span key={`lang-${l}-${i}`} className="text-xs text-gray-700 bg-gray-100 px-2 py-0.5 rounded">{l}</span>
               ))}
             </div>
           </section>

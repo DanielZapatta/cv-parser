@@ -8,7 +8,7 @@ export default function SkillsHighlight({ skills = [], title = 'Skills' }) {
         <div className="flex flex-wrap gap-2">
           {skills.map((skill, i) => (
             <span
-              key={i}
+              key={`${skill}-${i}`}
               className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-1 rounded-full"
             >
               {skill}

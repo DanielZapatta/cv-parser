@@ -45,7 +45,7 @@ export default function ScoreDisplay({ score, matchedSkills = [], missingSkills 
               <p className="text-xs font-semibold text-green-700 mb-1">✅ Matched Skills</p>
               <div className="flex flex-wrap gap-1">
                 {matchedSkills.slice(0, 6).map((s, i) => (
-                  <span key={i} className="text-xs bg-green-100 text-green-800 rounded-full px-2 py-0.5">
+                  <span key={`matched-${s}-${i}`} className="text-xs bg-green-100 text-green-800 rounded-full px-2 py-0.5">
                     {s}
                   </span>
                 ))}
@@ -61,7 +61,7 @@ export default function ScoreDisplay({ score, matchedSkills = [], missingSkills 
               <p className="text-xs font-semibold text-red-600 mb-1">❌ Missing Skills</p>
               <div className="flex flex-wrap gap-1">
                 {missingSkills.slice(0, 6).map((s, i) => (
-                  <span key={i} className="text-xs bg-red-100 text-red-800 rounded-full px-2 py-0.5">
+                  <span key={`missing-${s}-${i}`} className="text-xs bg-red-100 text-red-800 rounded-full px-2 py-0.5">
                     {s}
                   </span>
                 ))}
