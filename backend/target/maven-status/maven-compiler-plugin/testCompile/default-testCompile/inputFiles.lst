@@ -1,3 +1,4 @@
+/home/runner/work/cv-parser/cv-parser/backend/src/test/java/com/cvtailor/repository/OptimizationJobRepositoryTest.java
 /home/runner/work/cv-parser/cv-parser/backend/src/test/java/com/cvtailor/service/ValidatorServiceTest.java
 /home/runner/work/cv-parser/cv-parser/backend/src/test/java/com/cvtailor/CvTailorApplicationTest.java
 /home/runner/work/cv-parser/cv-parser/backend/src/test/java/com/cvtailor/service/LlmServiceTest.java

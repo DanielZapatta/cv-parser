@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.cvtailor.service.ValidatorServiceTest" time="0.014" tests="3" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.cvtailor.repository.OptimizationJobRepositoryTest" time="0.589" tests="3" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -8,6 +8,7 @@
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.vendor.url" value="https://adoptium.net/"/>
     <property name="user.timezone" value="Etc/UTC"/>
+    <property name="org.jboss.logging.provider" value="slf4j"/>
     <property name="os.name" value="Linux"/>
     <property name="java.vm.specification.version" value="21"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
@@ -27,6 +28,8 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="FILE_LOG_CHARSET" value="UTF-8"/>
+    <property name="java.awt.headless" value="true"/>
     <property name="surefire.real.class.path" value="/home/runner/work/cv-parser/cv-parser/backend/target/surefire/surefirebooter-20260330150450630_3.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="21.0.10+7-LTS"/>
@@ -41,10 +44,13 @@
     <property name="localRepository" value="/home/runner/.m2/repository"/>
     <property name="java.vendor.url.bug" value="https://github.com/adoptium/adoptium-support/issues"/>
     <property name="java.io.tmpdir" value="/tmp"/>
+    <property name="com.zaxxer.hikari.pool_number" value="1"/>
     <property name="java.version" value="21.0.10"/>
     <property name="user.dir" value="/home/runner/work/cv-parser/cv-parser/backend"/>
     <property name="os.arch" value="amd64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="PID" value="7038"/>
+    <property name="CONSOLE_LOG_CHARSET" value="UTF-8"/>
     <property name="native.encoding" value="UTF-8"/>
     <property name="java.library.path" value="/usr/java/packages/lib:/usr/lib64:/lib64:/lib:/usr/lib"/>
     <property name="java.vm.info" value="mixed mode, sharing"/>
@@ -53,17 +59,128 @@
     <property name="java.vm.version" value="21.0.10+7-LTS"/>
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="65.0"/>
+    <property name="LOGGED_APPLICATION_NAME" value="[cv-tailor-backend] "/>
   </properties>
-  <testcase name="validateAndNormalize_withBlankFields_shouldFallbackToOriginal" classname="com.cvtailor.service.ValidatorServiceTest" time="0.008">
-    <system-out><![CDATA[15:04:51.638 [main] INFO com.cvtailor.service.ValidatorService -- CV validated and normalized for: Jane Doe
+  <testcase name="save_andFindById_shouldPersistEntity" classname="com.cvtailor.repository.OptimizationJobRepositoryTest" time="0.095">
+    <system-out><![CDATA[
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.3)
+
+2026-03-30T15:04:55.586Z  INFO 7038 --- [cv-tailor-backend] [           main] c.c.r.OptimizationJobRepositoryTest      : Starting OptimizationJobRepositoryTest using Java 21.0.10 with PID 7038 (started by runner in /home/runner/work/cv-parser/cv-parser/backend)
+2026-03-30T15:04:55.586Z  INFO 7038 --- [cv-tailor-backend] [           main] c.c.r.OptimizationJobRepositoryTest      : No active profile set, falling back to 1 default profile: "default"
+2026-03-30T15:04:55.719Z  WARN 7038 --- [cv-tailor-backend] [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+Hibernate: 
+    create table optimization_jobs (
+        id uuid not null,
+        completed_at timestamp(6),
+        created_at timestamp(6) not null,
+        cv_text TEXT,
+        cv_text_hash varchar(64) not null,
+        error_message TEXT,
+        job_description_text TEXT,
+        match_score float(53),
+        matching_result_json TEXT,
+        model varchar(64) not null,
+        optimization_plan_json TEXT,
+        optimized_cv_json TEXT,
+        status varchar(16) not null check (status in ('PENDING','COMPLETED','FAILED')),
+        primary key (id)
+    )
+2026-03-30T15:04:55.838Z  INFO 7038 --- [cv-tailor-backend] [           main] c.c.r.OptimizationJobRepositoryTest      : Started OptimizationJobRepositoryTest in 0.277 seconds (process running for 5.159)
 ]]></system-out>
   </testcase>
-  <testcase name="validateAndNormalize_withValidGeneratedCv_shouldUseGenerated" classname="com.cvtailor.service.ValidatorServiceTest" time="0.001">
-    <system-out><![CDATA[15:04:51.642 [main] INFO com.cvtailor.service.ValidatorService -- CV validated and normalized for: John Doe
+  <testcase name="findAllByOrderByCreatedAtDesc_shouldReturnPagedResults" classname="com.cvtailor.repository.OptimizationJobRepositoryTest" time="0.14">
+    <system-out><![CDATA[Hibernate: 
+    insert 
+    into
+        optimization_jobs
+        (completed_at, created_at, cv_text, cv_text_hash, error_message, job_description_text, match_score, matching_result_json, model, optimization_plan_json, optimized_cv_json, status, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        optimization_jobs
+        (completed_at, created_at, cv_text, cv_text_hash, error_message, job_description_text, match_score, matching_result_json, model, optimization_plan_json, optimized_cv_json, status, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        optimization_jobs
+        (completed_at, created_at, cv_text, cv_text_hash, error_message, job_description_text, match_score, matching_result_json, model, optimization_plan_json, optimized_cv_json, status, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    select
+        oje1_0.id,
+        oje1_0.completed_at,
+        oje1_0.created_at,
+        oje1_0.cv_text,
+        oje1_0.cv_text_hash,
+        oje1_0.error_message,
+        oje1_0.job_description_text,
+        oje1_0.match_score,
+        oje1_0.matching_result_json,
+        oje1_0.model,
+        oje1_0.optimization_plan_json,
+        oje1_0.optimized_cv_json,
+        oje1_0.status 
+    from
+        optimization_jobs oje1_0 
+    order by
+        oje1_0.created_at desc 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
 ]]></system-out>
   </testcase>
-  <testcase name="validateAndNormalize_withNullGeneratedCv_shouldFallbackToOriginal" classname="com.cvtailor.service.ValidatorServiceTest" time="0.001">
-    <system-out><![CDATA[15:04:51.645 [main] WARN com.cvtailor.service.ValidatorService -- GeneratedCv is null, falling back to original
+  <testcase name="findByStatus_shouldFilterCorrectly" classname="com.cvtailor.repository.OptimizationJobRepositoryTest" time="0.026">
+    <system-out><![CDATA[Hibernate: 
+    insert 
+    into
+        optimization_jobs
+        (completed_at, created_at, cv_text, cv_text_hash, error_message, job_description_text, match_score, matching_result_json, model, optimization_plan_json, optimized_cv_json, status, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        optimization_jobs
+        (completed_at, created_at, cv_text, cv_text_hash, error_message, job_description_text, match_score, matching_result_json, model, optimization_plan_json, optimized_cv_json, status, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    select
+        oje1_0.id,
+        oje1_0.completed_at,
+        oje1_0.created_at,
+        oje1_0.cv_text,
+        oje1_0.cv_text_hash,
+        oje1_0.error_message,
+        oje1_0.job_description_text,
+        oje1_0.match_score,
+        oje1_0.matching_result_json,
+        oje1_0.model,
+        oje1_0.optimization_plan_json,
+        oje1_0.optimized_cv_json,
+        oje1_0.status 
+    from
+        optimization_jobs oje1_0 
+    where
+        oje1_0.status=? 
+    order by
+        oje1_0.created_at desc 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
 ]]></system-out>
   </testcase>
 </testsuite>

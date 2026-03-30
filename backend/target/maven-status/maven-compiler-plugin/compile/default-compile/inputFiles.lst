@@ -5,8 +5,10 @@
 /home/runner/work/cv-parser/cv-parser/backend/src/main/java/com/cvtailor/config/OllamaConfig.java
 /home/runner/work/cv-parser/cv-parser/backend/src/main/java/com/cvtailor/service/CvGeneratorService.java
 /home/runner/work/cv-parser/cv-parser/backend/src/main/java/com/cvtailor/model/response/OptimizationResponse.java
+/home/runner/work/cv-parser/cv-parser/backend/src/main/java/com/cvtailor/entity/OptimizationJobEntity.java
 /home/runner/work/cv-parser/cv-parser/backend/src/main/java/com/cvtailor/service/LlmService.java
 /home/runner/work/cv-parser/cv-parser/backend/src/main/java/com/cvtailor/model/request/OptimizationRequest.java
+/home/runner/work/cv-parser/cv-parser/backend/src/main/java/com/cvtailor/repository/OptimizationJobRepository.java
 /home/runner/work/cv-parser/cv-parser/backend/src/main/java/com/cvtailor/service/OptimizationService.java
 /home/runner/work/cv-parser/cv-parser/backend/src/main/java/com/cvtailor/service/MatchingService.java
 /home/runner/work/cv-parser/cv-parser/backend/src/main/java/com/cvtailor/model/domain/MatchingResult.java
